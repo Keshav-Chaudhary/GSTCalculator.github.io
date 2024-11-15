@@ -5,106 +5,145 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GST Calculator</title>
-  <!-- Include Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
-  <!-- Include Font Awesome for icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
   <style>
-    /* Custom color scheme */
-body {
-  background-color: #000000; /* Black */
-  color: #000000; 
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+    body {
+      background-color: #1a202c;
+      color: #f7fafc;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      animation: fadeIn 1s ease-in-out;
+    }
 
-.container {
-  background-color: #000000; 
-  flex-grow: 1;
-}
+    .container {
+      background-color: #1a202c;
+      flex-grow: 1;
+    }
 
-/* Additional CSS styles for hover effects and cursor */
-.hover-effect:hover {
-  transform: scale(1.1);
-}
+    .hover-effect:hover {
+      transform: scale(1.1);
+    }
 
-.blur-cursor {
-  cursor: pointer;
-  filter: blur(2px);
-}
+    .blur-cursor {
+      cursor: pointer;
+      filter: blur(2px);
+    }
 
-/* Custom styles for GST results */
-#result {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #FFFFFF;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+    #result {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #2d3748;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+    }
 
-#result h2 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-}
+    #result h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
 
-#result p {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
+    #result p {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
 
-#result span {
-  font-weight: bold;
-}
+    #result span {
+      font-weight: bold;
+    }
 
-/* Navigation bar styles */
-nav {
-  background-color: #000000; /* Black */
-  color: #FFFFFF; /* White text */
-  padding: 10px 0;
-}
+    nav {
+      background-color: #2d3748;
+      color: #f7fafc;
+      padding: 10px 0;
+    }
 
-nav a {
-  color: #FFFFFF;
-  margin-right: 20px;
-  transition: transform 0.3s ease; /* Smooth transition on hover */
-}
+    nav a {
+      color: #f7fafc;
+      margin-right: 20px;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
 
-nav a:hover {
-  text-decoration: underline;
-  transform: scale(1.1); /* Scale effect on hover */
-  color: #FFA500; 
-}
+    nav a:hover {
+      text-decoration: underline;
+      transform: scale(1.1);
+      color: #f97316;
+    }
 
-/* Footer styles */
-footer {
-  margin-top: auto;
-  background-color: #000000; /* Black */
-  color: #FFFFFF; /* White text */
-  text-align: center;
-  padding: 20px 0;
-  font-size: 0.9rem;
-}
+    footer {
+      margin-top: auto;
+      background-color: #2d3748;
+      color: #f7fafc;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
 
-footer a {
-  color: #FFFFFF;
-  margin: 0 10px;
-}
+    footer a {
+      color: #f7fafc;
+      margin: 0 10px;
+    }
 
-footer a:hover {
-  text-decoration: underline;
-  color: #FFA500;
-  
-}
+    footer a:hover {
+      text-decoration: underline;
+      color: #f97316;
+    }
 
+    footer:hover {
+      background-color: #4a5568;
+    }
 
-.calculated-text {
-  font-size: 0.9rem;
-  margin-top: 10px;
-}
+    .calculated-text {
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    input,
+    select,
+    button {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus,
+    select:focus,
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    button {
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #f97316;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
   </style>
 </head>
@@ -112,12 +151,12 @@ footer a:hover {
 <body>
   <nav class="flex justify-between items-center py-4 px-6 bg-orange-500 text-white">
     <div class="flex items-center">
-      <i class="fas fa-code fa-lg mr-2"></i> <!-- Icon for website title -->
-      <a href="#" class="font-semibold">GST Calculator</a>
+      <i class="fas fa-code fa-lg mr-2"></i>
+      <a href="#" class="font-semibold text-xl">GST Calculator</a>
     </div>
     <div class="flex items-center">
-      <a href="#" class="mr-4">More Calculators</a>
-      <a href="#">Future Projects</a>
+      <a href="#" class="mr-4 hover:text-orange-500">More Calculators</a>
+      <a href="#" class="hover:text-orange-500">Future Projects</a>
     </div>
   </nav>
 
@@ -125,8 +164,8 @@ footer a:hover {
     <h1 class="text-3xl font-bold mb-4 text-center">GST Calculator</h1>
     <div class="flex justify-center mb-4">
       <input type="number" id="amount" placeholder="Enter Amount"
-        class="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" />
-      <select id="rate" class="rounded-r-lg border border-gray-200 p-2 bg-white border-t border-b border-r">
+        class="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500" />
+      <select id="rate" class="rounded-r-lg border border-gray-200 p-2 bg-red-500 border-t border-b border-r focus:outline-none focus:ring-2 focus:ring-orange-500">
         <option value="0.25">0.25%</option>
         <option value="5">5%</option>
         <option value="10">10%</option>
@@ -135,15 +174,21 @@ footer a:hover {
         <option value="28">28%</option>
       </select>
     </div>
-    <div id="result" class="p-4 bg-white rounded-lg shadow-md mb-4">
-      <h2 class="text-lg font-bold mb-2">Calculated GST:</h2>
-      <p>Amount Excluding GST: <span id="amountExcludingGST"></span></p>
-      <p>Amount Including GST: <span id="amountIncludingGST"></span></p>
-      <p>GST Amount: <span id="gstAmount"></span></p>
-      <div id="sgstCgst">
+    <div id="result" class="p-4 bg-white rounded-lg shadow-md mb-4 flex justify-end flex-col">
+      <h2 class="text-lg font-bold mb-2 text-left">Calculated GST:</h2>
+      <p class="text-left">Amount Excluding GST: <span id="amountExcludingGST"></span></p>
+      <p class="text-left">Amount Including GST: <span id="amountIncludingGST"></span></p>
+      <p class="text-left">GST Amount: <span id="gstAmount"></span></p>
+      <div id="sgstCgst" class="text-left">
         <p class="calculated-text" id="igstText"></p>
         <p class="calculated-text" id="cgstText"></p>
         <p class="calculated-text" id="sgstText"></p>
+      </div>
+      <div class="flex justify-between items-center">
+        <div class="flex-grow"></div>
+        <button id="clearButton" class="ml-auto bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700">
+          Clear
+        </button>
       </div>
     </div>
   </div>
@@ -154,9 +199,7 @@ footer a:hover {
     <p>Made by Keshav Chaudhary 😎</p>
   </footer>
 
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- Include Font Awesome for icons -->
   <script>
-    // JavaScript code for calculating GST
     const amountInput = document.getElementById('amount');
     const rateSelect = document.getElementById('rate');
     const amountExcludingGST = document.getElementById('amountExcludingGST');
@@ -165,9 +208,11 @@ footer a:hover {
     const igstText = document.getElementById('igstText');
     const cgstText = document.getElementById('cgstText');
     const sgstText = document.getElementById('sgstText');
+    const clearButton = document.getElementById('clearButton');
 
     amountInput.addEventListener('input', calculateGST);
     rateSelect.addEventListener('change', calculateGST);
+    clearButton.addEventListener('click', clearFields);
 
     function calculateGST() {
       const amount = parseFloat(amountInput.value) || 0;
@@ -185,8 +230,17 @@ footer a:hover {
       sgstText.textContent = `SGST/UTGST - Rs ${sgstAmount.toFixed(2)}`;
     }
 
+    function clearFields() {
+      amountInput.value = '';
+      rateSelect.value = '0.25';
+      amountExcludingGST.textContent = '';
+      amountIncludingGST.textContent = '';
+      gstAmount.textContent = '';
+      igstText.textContent = '';
+      cgstText.textContent = '';
+      sgstText.textContent = '';
+    }
   </script>
 </body>
 
 </html>
-/* if you wanna use this as a source code then mention me */
